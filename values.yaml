@@ -1,0 +1,44 @@
+# Default values for custom-jenkins — edit these instead of editing templates.
+
+replicaCount: 1
+
+image:
+  repository: tharun0511/jenkins
+  tag: v2
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  # Port the Service exposes in-cluster (e.g. 80); UI is still on 8080 inside the pod.
+  port: 80
+  targetHttpPort: 8080
+  agentPort: 50000
+
+jenkins:
+  javaOpts: "-Djenkins.install.runSetupWizard=true"
+
+# Pod-level: volume ownership for /var/jenkins_home
+podSecurityContext:
+  fsGroup: 1000
+
+containerSecurityContext:
+  runAsUser: 0
+
+# Mount host Docker socket (root-on-host); dev / trusted nodes only.
+dockerSocket:
+  enabled: true
+
+# Jenkins stores everything under /var/jenkins_home
+persistence:
+  enabled: true
+  size: 8Gi
+  # Leave empty to use cluster default StorageClass
+  storageClass: ""
+
+ingress:
+  enabled: false
+  className: nginx
+  host: jenkins.example.local
+  tls: false
+
+resources: {}

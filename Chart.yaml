@@ -1,0 +1,6 @@
+apiVersion: v2
+name: custom-jenkins
+description: Minimal learning chart — Deployment, Service, PVC (not production-hardened).
+type: application
+version: 0.1.0
+appVersion: "lts"
