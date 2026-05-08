@@ -36,7 +36,7 @@ persistence:
   storageClass: ""
 
 ingress:
-  enabled: false
+  enabled: true
   className: nginx
   host: jenkins.localhost
   tls: false
